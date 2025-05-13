@@ -40,6 +40,23 @@ df_stats = pd.DataFrame({
 st.markdown("### Résultats actuels :")
 st.table(df_stats)
 
+import plotly.express as px
+
+# Créer un histogramme interactif
+fig = px.bar(
+    df_stats,
+    x="Nom de la case",
+    y="Passages",
+    hover_data=["Fréquence (%)"],
+    labels={"Passages": "Nombre de passages"},
+    title="📈 Histogramme des passages par case"
+)
+fig.update_layout(xaxis_tickangle=-45)
+
+# Affichage du graphe dans Streamlit
+st.plotly_chart(fig, use_container_width=True)
+
+
 # === BOUTON POUR TÉLÉCHARGER LES DONNÉES ===
 st.download_button(
     label="💾 Télécharger les données (CSV)",
